@@ -4,6 +4,7 @@
 /vendor
 /node_modules
 /public/themes
+/public/images
 /packages
 Homestead.json
 Homestead.yaml

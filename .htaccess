@@ -1,0 +1,30 @@
+
+RewriteEngine on
+
+<IfModule mod_rewrite.c>
+	<IfModule mod_negotiation.c>
+		Options -MultiViews
+	</IfModule>
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} -d [OR]
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ ^$1 [N]
+
+RewriteCond %{REQUEST_URI} (\.\w+$) [NC]
+RewriteRule ^(.*)$ public/$1
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ server.php
+
+</IfModule>
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-SSL} on
+RewriteCond %{HTTP_HOST} ^www\.tostemindonesia\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.tostemindonesia\.com$
+RewriteRule ^/?$ "https\:\/\/www\.tostemindonesia\.com\/" [R=301,L]
+
+RewriteCond %{HTTP_HOST} !^www\. [NC]
+RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
